@@ -3,10 +3,14 @@
 // a handleInput() method.
 
 const Player = function() {
-  this.x = 2 * BLOCK.DISTANCE_HORIZONTAL;
-  this.y = getPositionFromMiddleOfBlock(5);
+  this.init();
 
   this.sprite = "images/char-boy.png";
+};
+
+Player.prototype.init = function() {
+  this.x = 2 * BLOCK.DISTANCE_HORIZONTAL;
+  this.y = getPositionFromMiddleOfBlock(5);
 };
 
 // Update the enemy's position, required method for game
@@ -65,6 +69,12 @@ Player.prototype.moveUp = function() {
 
   if (isInTopBoundary) {
     this.y = this.y - BLOCK.DISTANCE_VERTICAL;
+  }
+
+  if (this.y < BLOCK.DISTANCE_VERTICAL + topBoundary) {
+    setTimeout(() => {
+      this.init();
+    }, 500);
   }
 };
 
