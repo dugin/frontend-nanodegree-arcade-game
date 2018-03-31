@@ -43,40 +43,38 @@ Player.prototype.handleInput = function(allowedKeys) {
 };
 
 Player.prototype.moveLeft = function() {
-  const leftBoundaries = 0;
+  const leftBoundary = 0;
 
-  const isInLeftBoundaries = this.x > leftBoundaries;
-  if (isInLeftBoundaries) {
+  const isInLeftBoundary = this.x > leftBoundary;
+  if (isInLeftBoundary) {
     this.x = this.x - BLOCK.DISTANCE_HORIZONTAL;
   }
 };
 
 Player.prototype.moveRight = function() {
-  const rightBoundaries = (numCols - 1) * BLOCK.DISTANCE_HORIZONTAL;
-  const isInRightBoundaries = this.x < rightBoundaries;
-
-  if (isInRightBoundaries) {
+  console.log(isInRightBoundary(this.x));
+  if (isInRightBoundary(this.x)) {
     this.x = this.x + BLOCK.DISTANCE_HORIZONTAL;
   }
 };
 
 Player.prototype.moveUp = function() {
-  const topBoundaries = BLOCK.MIDDLE_OF_BLOCK_VERTICAL;
+  const topBoundary = BLOCK.MIDDLE_OF_BLOCK_VERTICAL;
 
-  const isInTopBoundaries = this.y >= topBoundaries;
+  const isInTopBoundary = this.y >= topBoundary;
 
-  if (isInTopBoundaries) {
+  if (isInTopBoundary) {
     this.y = this.y - BLOCK.DISTANCE_VERTICAL;
   }
 };
 
 Player.prototype.moveDown = function() {
-  const bottomBoundaries =
+  const bottomBoundary =
     BLOCK.DISTANCE_VERTICAL * (numCols - 1) + BLOCK.MIDDLE_OF_BLOCK_VERTICAL;
 
-  const isInBottomBoundaries = this.y < bottomBoundaries;
+  const isInBottomBoundary = this.y < bottomBoundary;
 
-  if (isInBottomBoundaries) {
+  if (isInBottomBoundary) {
     this.y = this.y + BLOCK.DISTANCE_VERTICAL;
   }
 };
