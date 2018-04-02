@@ -43,10 +43,7 @@ class Player {
   }
 
   _moveLeft() {
-    const leftBoundary = 0;
-
-    const isInLeftBoundary = this.x > leftBoundary;
-    if (isInLeftBoundary) {
+    if (isInLeftBoundary(this.x)) {
       this.x = this.x - BLOCK.DISTANCE_HORIZONTAL;
     }
   }
@@ -58,30 +55,19 @@ class Player {
   }
 
   _moveUp() {
-    const topBoundary = BLOCK.MIDDLE_OF_BLOCK_VERTICAL;
-
-    const isInTopBoundary = this.y >= topBoundary;
-
-    const isInTheWater = this.y < BLOCK.DISTANCE_VERTICAL + topBoundary;
-
-    if (isInTopBoundary) {
-      this.y = this.y - BLOCK.DISTANCE_VERTICAL;
-    }
-
-    if (isInTheWater) {
+    if (isInTheWater(this.y)) {
       setTimeout(() => {
         this._init();
       }, 300);
     }
+
+    if (isInTopBoundary(this.y)) {
+      this.y = this.y - BLOCK.DISTANCE_VERTICAL;
+    }
   }
 
   _moveDown() {
-    const bottomBoundary =
-      BLOCK.DISTANCE_VERTICAL * (numCols - 1) + BLOCK.MIDDLE_OF_BLOCK_VERTICAL;
-
-    const isInBottomBoundary = this.y < bottomBoundary;
-
-    if (isInBottomBoundary) {
+    if (isInBottomBoundary(this.y)) {
       this.y = this.y + BLOCK.DISTANCE_VERTICAL;
     }
   }
