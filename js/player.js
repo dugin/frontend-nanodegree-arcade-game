@@ -1,7 +1,23 @@
 class Player {
   constructor() {
     this.init();
-    this.sprite = 'images/char-boy.png';
+    this.sprite = this.getRandomPlayerSkin();
+  }
+
+  getRandomPlayerSkin() {
+    switch (generateRandom(0, 5)) {
+      case 0:
+        return 'images/char-boy.png';
+      case 1:
+        return 'images/char-cat-girl.png';
+      case 2:
+        return 'images/char-horn-girl.png';
+      case 3:
+        return 'images/char-pink-girl.png';
+      case 4:
+      default:
+        return 'images/char-princess-girl.png';
+    }
   }
 
   init() {
@@ -81,6 +97,12 @@ class Player {
 
   _setScore() {
     this.victoryAmount++;
-    setScore(getScore() + 10 * this.victoryAmount);
+    const newScore = getScore() + 10 * this.victoryAmount;
+
+    setScore(newScore);
+
+    if (getHighestScore() < newScore) {
+      setHighestScore(newScore);
+    }
   }
 }
