@@ -10,7 +10,7 @@ function generateEnemies(amount) {
   const enemies = new Array(amount);
   enemies.fill({});
 
-  return enemies.map(enemy => new Enemy(setEnemyPositionAndSpeed()));
+  return enemies.map(() => new Enemy(setEnemyPositionAndSpeed()));
 }
 
 function setEnemyPositionAndSpeed() {
@@ -24,8 +24,7 @@ function setEnemyPositionAndSpeed() {
 function getPosition(positionX, positionY) {
   return {
     x: positionX / BLOCK.DISTANCE_HORIZONTAL + 1,
-    y:
-      (positionY + BLOCK.MIDDLE_OF_BLOCK_VERTICAL) / BLOCK.DISTANCE_VERTICAL + 1
+    y: (positionY + BLOCK.MIDDLE_OF_BLOCK_VERTICAL) / BLOCK.DISTANCE_VERTICAL + 1
   };
 }
 
@@ -39,13 +38,8 @@ function isInLeftBoundary(positionX) {
   return positionX > 0;
 }
 
-function isInTopBoundary(positionY) {
-  return positionY >= BLOCK.MIDDLE_OF_BLOCK_VERTICAL;
-}
-
 function isInBottomBoundary(positionY) {
-  const bottomBoundary =
-    BLOCK.DISTANCE_VERTICAL * (numCols - 1) + BLOCK.MIDDLE_OF_BLOCK_VERTICAL;
+  const bottomBoundary = BLOCK.DISTANCE_VERTICAL * (numCols - 1) + BLOCK.MIDDLE_OF_BLOCK_VERTICAL;
 
   return positionY < bottomBoundary;
 }

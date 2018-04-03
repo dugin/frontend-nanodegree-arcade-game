@@ -1,8 +1,12 @@
 class Player {
   constructor() {
-    this.reset();
+    this.init();
+    this.sprite = 'images/char-boy.png';
+  }
 
-    this.sprite = "images/char-boy.png";
+  init() {
+    this.victoryAmount = 0;
+    this.reset();
   }
 
   getPosition() {
@@ -31,7 +35,6 @@ class Player {
     this.movementDirection = null;
   }
 
-  // Draw the enemy on the screen, required method for game
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
@@ -59,19 +62,25 @@ class Player {
 
   _moveUp() {
     if (isInTheWater(this.y)) {
+      PLAYER_MOVEMENT.disabled = true;
       setTimeout(() => {
         this.reset();
+        this._setScore();
+        PLAYER_MOVEMENT.disabled = false;
       }, 300);
     }
 
-    if (isInTopBoundary(this.y)) {
-      this.y = this.y - BLOCK.DISTANCE_VERTICAL;
-    }
+    this.y = this.y - BLOCK.DISTANCE_VERTICAL;
   }
 
   _moveDown() {
     if (isInBottomBoundary(this.y)) {
       this.y = this.y + BLOCK.DISTANCE_VERTICAL;
     }
+  }
+
+  _setScore() {
+    this.victoryAmount++;
+    setScore(getScore() + 10 * this.victoryAmount);
   }
 }

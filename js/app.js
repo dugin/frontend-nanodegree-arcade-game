@@ -3,15 +3,17 @@ const BLOCK = {
   DISTANCE_VERTICAL: 85,
   MIDDLE_OF_BLOCK_VERTICAL: 85 / 2
 };
+
 const ENEMY = { AMOUNT: 6 };
 const PLAYER_MOVEMENT = {
-  LEFT: "left",
-  UP: "up",
-  RIGHT: "right",
-  DOWN: "down"
+  LEFT: 'left',
+  UP: 'up',
+  RIGHT: 'right',
+  DOWN: 'down',
+  disabled: false
 };
 
-document.addEventListener("keyup", e => {
+document.addEventListener('keyup', e => {
   const allowedKeys = {
     37: PLAYER_MOVEMENT.LEFT,
     38: PLAYER_MOVEMENT.UP,
@@ -19,7 +21,9 @@ document.addEventListener("keyup", e => {
     40: PLAYER_MOVEMENT.DOWN
   };
 
-  player.handleInput(allowedKeys[e.keyCode]);
+  if (!PLAYER_MOVEMENT.disabled) {
+    player.handleInput(allowedKeys[e.keyCode]);
+  }
 });
 
 let allEnemies = [];
