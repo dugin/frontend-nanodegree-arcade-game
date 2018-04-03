@@ -17,7 +17,15 @@ function setEnemyPositionAndSpeed() {
   return {
     positionX: generateRandom(0, numCols) * BLOCK.DISTANCE_HORIZONTAL,
     positionY: getPositionFromMiddleOfBlock(generateRandom(1, 3)),
-    speed: generateRandom(20 - ENEMY.AMOUNT, 20) * 10
+    speed: generateRandom(23 - ENEMY.AMOUNT, 23) * 10
+  };
+}
+
+function getPosition(positionX, positionY) {
+  return {
+    x: positionX / BLOCK.DISTANCE_HORIZONTAL + 1,
+    y:
+      (positionY + BLOCK.MIDDLE_OF_BLOCK_VERTICAL) / BLOCK.DISTANCE_VERTICAL + 1
   };
 }
 

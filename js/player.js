@@ -1,24 +1,16 @@
 class Player {
   constructor() {
-    this._init();
+    this.reset();
 
     this.sprite = "images/char-boy.png";
   }
-  // Update the enemy's position, required method for game
-  // Parameter: dt, a time delta between ticks
+
+  getPosition() {
+    return getPosition(this.x, this.y);
+  }
+
   update() {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-  }
-
-  // Draw the enemy on the screen, required method for game
-  render() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-  }
-
-  handleInput(allowedKeys) {
-    switch (allowedKeys) {
+    switch (this.movementDirection) {
       case PLAYER_MOVEMENT.LEFT:
         this._moveLeft();
         break;
@@ -35,9 +27,20 @@ class Player {
       default:
         break;
     }
+
+    this.movementDirection = null;
   }
 
-  _init() {
+  // Draw the enemy on the screen, required method for game
+  render() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  }
+
+  handleInput(allowedKeys) {
+    this.movementDirection = allowedKeys;
+  }
+
+  reset() {
     this.x = 2 * BLOCK.DISTANCE_HORIZONTAL;
     this.y = getPositionFromMiddleOfBlock(5);
   }
@@ -57,7 +60,7 @@ class Player {
   _moveUp() {
     if (isInTheWater(this.y)) {
       setTimeout(() => {
-        this._init();
+        this.reset();
       }, 300);
     }
 

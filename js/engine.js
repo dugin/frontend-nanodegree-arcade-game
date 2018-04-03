@@ -82,7 +82,22 @@ var Engine = (function(global) {
      */
   function update(dt) {
     updateEntities(dt);
-    // checkCollisions();
+
+    if (didPlayerCollide()) {
+      player.reset();
+    }
+  }
+
+  function didPlayerCollide() {
+    const playerPosition = player.getPosition();
+
+    return allEnemies.some(enemy => {
+      const enemyPosition = enemy.getPosition();
+      return (
+        Math.round(enemyPosition.x) === playerPosition.x &&
+        enemyPosition.y === playerPosition.y
+      );
+    });
   }
 
   /* This is called by the update function and loops through all of the
@@ -160,14 +175,14 @@ var Engine = (function(global) {
 
   /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
-     * those sorts of things. It's only called once by the init() method.
+     * those sorts of things. It's only called once by the reset() method.
      */
   function reset() {
     // noop
   }
 
   /* Go ahead and load all of the images we know we're going to need to
-     * draw our game level. Then set init as the callback method, so that when
+     * draw our game level. Then set reset as the callback method, so that when
      * all of these images are properly loaded our game will start.
      */
   Resources.load([
